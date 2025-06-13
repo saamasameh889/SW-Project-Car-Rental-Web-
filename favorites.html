@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Favorite Cars</title>
+  <link rel="stylesheet" href="../assets/css/cars.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1>Your Favorite Cars</h1>
+</header>
+
+<main>
+  <div class="cars-container" id="favorites-container">
+    <!-- Favorite cars will be displayed here -->
+  </div>
+</main>
+
+<script>
+  // Fetch the favorite cars from localStorage
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  const container = document.getElementById('favorites-container');
+
+  if (favorites.length === 0) {
+    container.innerHTML = '<p class="no-results">You have no favorite cars yet. Start adding some!</p>';
+  } else {
+    // Display the favorite cars
+    favorites.forEach(car => {
+      const carCard = document.createElement('div');
+      carCard.classList.add('car-card');
+      carCard.innerHTML = `
+        <div class="car-image-frame">
+          <img src="${car.image}" alt="${car.name}" class="car-image" onerror="this.src='/static/default-image.jpg';" loading="lazy">
+        </div>
+        <div class="car-details">
+          <h2>${car.name}</h2>
+          <button onclick="removeFromFavorites('${car.id}')">Remove from Favorites</button>
+        </div>
+      `;
+      container.appendChild(carCard);
+    });
+  }
+
+  // Function to remove a car from favorites
+  function removeFromFavorites(carId) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    // Remove the car with the matching ID
+    favorites = favorites.filter(car => car.id !== carId);
+
+    // Update the favorites list in localStorage
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+
+    // Refresh the page to show updated list
+    window.location.reload();
+  }
+</script>
+
+</body>
+</html>

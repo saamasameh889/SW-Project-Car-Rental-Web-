@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ridex - Rent your favourite car</title>
+
+  <link rel="shortcut icon" href="../assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="../assets/css/login.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Open+Sans&display=swap" rel="stylesheet">
+
+  <title>Register for new users</title>
+</head>
+
+<body>
+  <div class="auth-container">
+    <h1>Welcome to Car Rental</h1>
+    <div class="auth-forms">
+      
+    <!-- Register Form -->
+    <form id="register-form" class="form" method="post" action="/registerVerification">
+      <h2>Register Form</h2>
+      <br>
+      <label for="full_name">Full Name:</label>
+      <input type="text" id="full_name" name="full_name" required>
+      <br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <br>
+      <label for="user_type">User Type:</label>
+      <select id="user_type" name="user_type" required>
+          <option value="Owner">Owner</option>
+          <option value="User">User</option>
+      </select>
+      <br>
+      <button type="submit">Register</button>
+    </form>
+    
+    <div>
+      <br>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if message|length > 6 %}
+              <font class="{{ category }}" color="red">{{ message }}</font>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
